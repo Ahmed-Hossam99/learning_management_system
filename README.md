@@ -32,13 +32,18 @@ ESlint
 
 ### GMAIL
 
-ptos2021@gmail.com
-remah654312
+email = bassthalkapp@gmail.com
+passGmail = admin2021
 
 ### Cloudinary
 
-CLOUDINARY_URL=
+Admin2021_
 
 ### Atlas
 
 ### heroku
+
+Admin2021_
+
+### api
+https://bassthalk.herokuapp.com/
