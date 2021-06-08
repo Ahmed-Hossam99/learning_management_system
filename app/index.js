@@ -6,7 +6,7 @@ const server = require('./server');
 
 (() => {
   console.info(
-    '📦 "Graduation "'.blue +
+    '📦 "Bassthalk "'.blue +
     ' API backend ⚡️ powered by '.green +
     '" 7ottos & Remah "'.magenta
   );
