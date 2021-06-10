@@ -1,7 +1,7 @@
 const $baseCtrl = require("../$baseCtrl");
 const models = require("../../models");
 const { APIResponse } = require("../../utils");
-const smsService = require('../../services/sms');
+const smsService = require("../../services/sms");
 
 module.exports = $baseCtrl(async (req, res) => {
   // retreive specific user by phone
@@ -13,14 +13,17 @@ module.exports = $baseCtrl(async (req, res) => {
   }
 
   if (!req.body.phone.match(/^\+201[0125][0-9]{8}$/))
-        return APIResponse.BadRequest(res, 'Phone is invailed');
+    return APIResponse.BadRequest(res, "Phone is invailed");
 
   // check if code which send to user is equal to code which entered by him
-  var verificationResult = await smsService.verificationCode(req.body.phone, req.body.code);
-    if (verificationResult.status !== 'approved')
-        return APIResponse.BadRequest(res, 'Code is invailed');
+  var verificationResult = await smsService.verificationCode(
+    req.body.phone,
+    req.body.code
+  );
+  if (verificationResult.status !== "approved")
+    return APIResponse.BadRequest(res, "Code is invailed");
 
-  await user.set({enabled: true}).save()
-  
-  return APIResponse.Ok(res,user);
+  await user.set({ enabled: true }).save();
+
+  return APIResponse.Ok(res, user);
 });

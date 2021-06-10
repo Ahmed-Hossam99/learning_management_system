@@ -7,7 +7,8 @@ const $baseModel = require("../$baseModel");
 // RegExp rules
 // const usernameRules = /^[a-zA-Z][a-zA-Z0-9]{4,19}$/;
 const passwordRules = /^.{6,}$/;
-const emailRules = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRules =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneRules = /^\+201[0125][0-9]{8}$/;
 // https://regexr.com/3c53v
 
@@ -49,7 +50,6 @@ const schema = new mongoose.Schema(
     },
     country: {
       type: String,
-      enum: ["Egypt", "SaudiArabia"],
     },
     enabled: {
       type: Boolean,
@@ -64,6 +64,10 @@ const schema = new mongoose.Schema(
     },
     birthdate: {
       type: Date,
+    },
+    isAllowedToResetPassword: {
+      type: Boolean,
+      default: false,
     },
     pushTokens: [
       new mongoose.Schema(
@@ -88,8 +92,9 @@ const schema = new mongoose.Schema(
 const response = (doc, options) => {
   return {
     id: doc.id,
+    isAllowedToResetPassword: doc.isAllowedToResetPassword,
     username: doc.username,
-    password: options.password && !doc.activated ? doc.password : undefined,
+    grade: doc.grade, // for student
     gender: doc.gender,
     photo: doc.photo,
     email: doc.email,
@@ -131,19 +136,18 @@ schema.methods.sendNotification = async function (message) {
   if (changed) await this.save();
 };
 
-
-schema.pre('save', async function (next) {
+schema.pre("save", async function (next) {
   const user = this;
 
-  let nullableFields = ['phone', 'email'];
+  let nullableFields = ["phone", "email"];
   for (let i = 0; i < nullableFields.length; i++) {
     if (user.isModified(nullableFields[i])) {
       const value = user[nullableFields[i]];
-      if (value === '' || value === null) user[nullableFields[i]] = undefined;
+      if (value === "" || value === null) user[nullableFields[i]] = undefined;
     }
   }
 
-  let uniqueFields = ['email', 'phone'];
+  let uniqueFields = ["email", "phone"];
   for (let i = 0; i < uniqueFields.length; i++) {
     if (user.isModified(uniqueFields[i])) {
       // be true if was undefined then set value to it , be false if same value set to it
@@ -151,7 +155,7 @@ schema.pre('save', async function (next) {
       if (value === undefined) continue;
       let filter = {};
       filter[uniqueFields[i]] = value;
-      let count = await mongoose.model('user').countDocuments(filter);
+      let count = await mongoose.model("user").countDocuments(filter);
       if (count) {
         let error = new mongoose.Error.ValidationError(user);
         error.errors[uniqueFields[i]] = {
@@ -163,7 +167,6 @@ schema.pre('save', async function (next) {
   }
   return next();
 });
-
 
 schema.statics.generateRandomUsername = async function () {
   let username;

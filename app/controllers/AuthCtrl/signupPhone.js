@@ -37,8 +37,8 @@ module.exports = $baseCtrl(
     }
 
     // Encrypt Password
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(req.body.password, salt);
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hash;
 
     // Upload photo if enter by user
@@ -47,7 +47,7 @@ module.exports = $baseCtrl(
     }
 
     // save user to db
-    const newUser = await new models._user(req.body).save();
+    const newUser = await new models.student(req.body).save();
 
     const payload = {
       userId: newUser.id,

@@ -8,14 +8,16 @@ const passport = require("passport");
 let apiRouter = express.Router();
 
 // public
-apiRouter.post("/verify-reset", ctrls.AuthCtrl.resetPasswordByPhone);
+// apiRouter.post("/verify-reset", ctrls.AuthCtrl.resetPasswordByPhone);
 apiRouter.post("/forget", ctrls.AuthCtrl.sendForgetSMSPhone);
-apiRouter.post("/signup-phone", ctrls.AuthCtrl.signupPhone);
+apiRouter.post("/check-code", ctrls.AuthCtrl.checkForgetCode);
+apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordAfterCheck);
+apiRouter.post("/signup", ctrls.AuthCtrl.signupPhone);
 apiRouter.post("/verify", ctrls.AuthCtrl.verifyAccountByPhoneCode);
 apiRouter.post("/login-phone", ctrls.AuthCtrl.loginPhone);
-apiRouter.post("/signup", ctrls.AuthCtrl.signupEmail);
+apiRouter.post("/signup-email", ctrls.AuthCtrl.signupEmail);
 apiRouter.post("/resend", ctrls.AuthCtrl.SendForgetCodeEmail);
-apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordByEmail);
+// apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordByEmail);
 apiRouter.post(
   "/login-google",
   passport.authenticate("googleToken1", { session: false }),
