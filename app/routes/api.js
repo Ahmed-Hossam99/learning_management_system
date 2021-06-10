@@ -17,6 +17,7 @@ apiRouter.post("/verify", ctrls.AuthCtrl.verifyAccountByPhoneCode);
 apiRouter.post("/login-phone", ctrls.AuthCtrl.loginPhone);
 apiRouter.post("/signup-email", ctrls.AuthCtrl.signupEmail);
 apiRouter.post("/resend", ctrls.AuthCtrl.SendForgetCodeEmail);
+apiRouter.post("/remove-phone", ctrls.AuthCtrl.removePhoneNumber);
 // apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordByEmail);
 apiRouter.post(
   "/login-google",
