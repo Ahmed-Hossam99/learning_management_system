@@ -9,6 +9,9 @@ module.exports = $baseCtrl(async (req, res) => {
   // catch specific class
   const Class = await models.class.findById(id);
   if (!Class) return APIResponse.NotFound(res);
+
+  await models.subject.deleteMany({ class: id });
+
   // delete class
   await Class.delete();
 

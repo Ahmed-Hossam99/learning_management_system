@@ -8,6 +8,8 @@ module.exports = $baseCtrl(async (req, res) => {
   let system = await models.system.findById(id);
   if (!system) return APIResponse.NotFound(res, "No system with that id");
 
+  await models.level.deleteMany({ system: id });
+
   await system.delete();
 
   return APIResponse.NoContent(res);
