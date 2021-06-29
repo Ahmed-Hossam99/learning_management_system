@@ -29,6 +29,7 @@ const response = (doc) => {
     icon: doc.icon,
     class: doc.class, // for subject
     semester: doc.semester, // for subject
+    teacher: doc.teacher, // for subject
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

@@ -11,15 +11,11 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    subject: {
+    course: {
       type: Number,
-      ref: "subject",
+      ref: "course",
       required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
+    }
   },
   { timestamps: true, discriminatorKey: "type" }
 );

@@ -16,9 +16,9 @@ const schema = new mongoose.Schema(
       type: Number,
       ref: "unit",
     },
-    subject: {
+    course: {
       type: Number,
-      ref: "subject",
+      ref: "course",
     },
     head: {
       type: String,

@@ -16,9 +16,9 @@ const schema = new mongoose.Schema(
       ref: "unit",
       required: true,
     },
-    subject: {
+    course: {
       type: Number,
-      ref: "subject",
+      ref: "course",
       required: true,
     },
     numberOfExams: {
@@ -33,15 +33,7 @@ const schema = new mongoose.Schema(
           type: Number,
           ref: "student",
           required: true,
-        },
-        solutions: [
-          // only done solutions here , not necessary successful
-          {
-            type: Number,
-            ref: "solution",
-            required: true,
-          },
-        ],
+        }
       },
     ],
   },

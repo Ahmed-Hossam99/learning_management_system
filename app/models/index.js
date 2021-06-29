@@ -2,6 +2,7 @@ module.exports = {
   _user: require("./users/_user.model"),
   admin: require("./users/admin.model"),
   student: require("./users/student.model"),
+  teacher: require("./users/teacher.model"),
   notification: require("./notifications/_notification.model"),
   system: require("./system.model"),
   level: require("./level.model"),

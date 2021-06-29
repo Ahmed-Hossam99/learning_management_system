@@ -14,6 +14,10 @@ const schema = new mongoose.Schema(
       ref: "class",
       required: true,
     },
+    teacher: {
+      type: Number,
+      ref: "teacher",
+    },
   },
   { discriminatorKey: "type" }
 );

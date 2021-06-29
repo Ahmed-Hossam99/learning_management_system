@@ -12,6 +12,11 @@ module.exports = $baseCtrl(
     const _class = await models.class.findById(id);
     if (!_class) return APIResponse.NotFound(res, "No Class WIth THat id");
 
+    if (req.queryFilter.isAssigned) {
+      req.queryFilter.teacher = { $exists: false };
+      delete req.queryFilter.isAssigned;
+    }
+
     const subjects = await models.subject.fetchAll(
       req.allowPagination,
       {

@@ -2,6 +2,7 @@ const { isUndefined } = require('util');
 const multer = require('multer');
 const APIResponse = require('../utils/APIResponse');
 const LocalStorage = require('../services/localStorage');
+const { escapeRegExp } = require("lodash");
 
 // [TODO] mime types checking
 // [TODO] general uploaded files response [LocalStorage, ColudniaryStorage, S3Storage, ...]
@@ -50,6 +51,21 @@ module.exports = function (a, b, c) {
         if (field === "id") {
           const id = parseInt(req.query.id);
           if (!isNaN(id)) req.queryFilter["_id"] = id;
+        } else if (field === "username") {
+          req.queryFilter["username"] = new RegExp(
+            escapeRegExp(req.query.username),
+            "i"
+          );
+        } else if (field === "email") {
+          req.queryFilter["email"] = new RegExp(
+            escapeRegExp(req.query.email),
+            "i"
+          );
+        } else if (field === "phone") {
+          req.queryFilter["phone"] = new RegExp(
+            escapeRegExp(req.query.phone),
+            "i"
+          );
         } else {
           req.queryFilter[field] = req.query[field];
         }
