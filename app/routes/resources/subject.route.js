@@ -5,9 +5,9 @@ const ctrls = require("../../controllers");
 let router = express.Router();
 
 router.get("/subjects/:id", ctrls.SubjectCtrl.fetchOne);
-router.get("/classes/:id/subjects", ctrls.SubjectCtrl.fetchAll);
+router.get("/section/:id/subjects", ctrls.SubjectCtrl.fetchAll);
 router.post(
-  "/classes/:id/subjects",
+  "/section/:id/subjects",
   policies.isAllowed(["admin"]),
   ctrls.SubjectCtrl.createOne
 );

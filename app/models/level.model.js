@@ -11,11 +11,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    system: {
-      type: Number,
-      ref: 'system',
-      required: true
-    },
+
   },
   { timestamps: true },
 );
@@ -25,7 +21,6 @@ const response = (doc) => {
     id: doc.id,
     nameAr: doc.nameAr,
     nameEn: doc.nameEn,
-    system: doc.system,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

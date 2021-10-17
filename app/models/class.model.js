@@ -11,6 +11,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     level: {
       type: Number,
       ref: 'level',
@@ -26,6 +27,8 @@ const response = (doc) => {
     nameAr: doc.nameAr,
     nameEn: doc.nameEn,
     level: doc.level,
+    system: doc.system,
+    capacity: doc.capacity,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

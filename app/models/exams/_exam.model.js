@@ -31,20 +31,11 @@ const schema = new mongoose.Schema(
             required: true,
           },
         ],
-        seen: {
-          type: Boolean,
-          default: false,
-        },
       },
     ],
-    object: {
+    numberOfAllowedTimesToSolve: {
       type: Number,
-      refPath: "objectType",
-      required: true,
-    },
-    objectType: {
-      type: String,
-      enum: ["lesson"],
+      default: 1,
       required: true,
     },
   },
@@ -61,30 +52,9 @@ schema.virtual("points").get(function () {
 });
 
 const response = (doc, options) => {
-  let isSolving = false;
-  let isChecking = false;
-  let isPassed = false;
-  let highestScore = -1;
-  let isAllowed;
-  let showResults = false;
-  if (options && options.showResults === true) {
-    const solutions = doc.students[0] ? doc.students[0].solutions : [];
-    isAllowed = solutions.length < doc.numberOfAllowedTimesToSolve;
-    showResults = true;
-    solutions.forEach((solution) => {
-      if (solution.status === "solving") isSolving = true;
-      else if (solution.status === "checking") isChecking = true;
-      else if ((solution.mark / doc.points) * 100 >= doc.passing_percentage)
-        isPassed = true;
-      highestScore =
-        solution.mark > highestScore && solution.status === "done"
-          ? solution.mark
-          : highestScore;
-    });
-  }
   return {
     id: doc.id,
-    // students: doc.students,
+    subject: doc.subject,
     numberOfAllowedTimesToSolve: doc.numberOfAllowedTimesToSolve,
     availability: doc.availability,
     title: doc.title,
@@ -96,13 +66,12 @@ const response = (doc, options) => {
     duration: doc.duration, // general exam
     isTimed: doc.isTimed, // general exam
     passing_percentage: doc.passing_percentage, // general exam
-    isSolving: showResults ? isSolving : undefined,
-    isChecking: showResults ? isChecking : undefined,
-    isPassed: showResults ? isPassed : undefined,
-    isAllowed: showResults ? isAllowed : undefined,
-    highestScore:
-      showResults === false || highestScore === -1 ? undefined : highestScore,
-    questions: options && options.hideQuestions ? undefined : doc.questions,
+    questions:
+      doc.questions &&
+        doc.questions[0] &&
+        !(doc.questions[0].question instanceof Object)
+        ? undefined
+        : doc.questions,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

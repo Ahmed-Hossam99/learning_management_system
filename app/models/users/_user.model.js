@@ -96,10 +96,18 @@ const response = (doc, options) => {
     username: doc.username,
     grade: doc.grade, // for student
     gender: doc.gender,
+    students: doc.students,//for parent
+    subjects: doc.subjects, // for teachers
+    sections: doc.sections, // for teachers
+    classes: doc.classes, // for teachers
     photo: doc.photo,
     email: doc.email,
     phone: doc.phone,
     country: doc.country,
+    section: doc.section,
+    class: doc.class,
+    level: doc.level,
+    address: doc.address,
     enabled: doc.enabled,
     birthdate: doc.birthdate,
     pushTokens: doc.pushTokens,

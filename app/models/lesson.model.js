@@ -11,31 +11,16 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    unit: {
+    unite: {
       type: Number,
-      ref: "unit",
+      ref: "unite",
       required: true,
     },
-    course: {
+    subject: {
       type: Number,
-      ref: "course",
+      ref: "subject",
       required: true,
     },
-    numberOfExams: {
-      type: Number,
-      default: 0,
-      required: true,
-    },
-    students: [
-      {
-        _id: false,
-        student: {
-          type: Number,
-          ref: "student",
-          required: true,
-        }
-      },
-    ],
   },
   { timestamps: true }
 );
@@ -43,10 +28,9 @@ const schema = new mongoose.Schema(
 const response = (doc) => {
   return {
     id: doc.id,
-    numberOfExams: doc.numberOfExams,
     nameAr: doc.nameAr,
     nameEn: doc.nameEn,
-    unit: doc.unit,
+    unite: doc.unite,
     subject: doc.subject,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,

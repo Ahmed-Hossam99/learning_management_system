@@ -28,13 +28,13 @@ module.exports = $baseCtrl(
       return APIResponse.BadRequest(res, " phone Already in use .");
     }
 
-    try {
-      await smsService.sendVerificationCode(req.body.phone);
-      console.log("Code Sent Successfully .");
-    } catch (error) {
-      console.log(error);
-      return APIResponse.ServerError(res, error);
-    }
+    // try {
+    //   await smsService.sendVerificationCode(req.body.phone);
+    //   console.log("Code Sent Successfully .");
+    // } catch (error) {
+    //   console.log(error);
+    //   return APIResponse.ServerError(res, error);
+    // }
 
     // Encrypt Password
     let salt = bcrypt.genSaltSync(10);

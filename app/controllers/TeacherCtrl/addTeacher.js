@@ -9,12 +9,17 @@ module.exports = $baseCtrl(
   cloudinaryStorage,
   async (req, res) => {
     // Check if E-mail Already Exist
-    let user = await models._user.findOne({
-      $or: [{ email: req.body.email }, { phone: req.body.phone }],
-    });
-    if (user) {
-      return APIResponse.BadRequest(res, " Email/phone Already in use .");
+    let user;
+    if (req.body.phone) {
+      user = await models._user.findOne({
+        $or: [{ email: req.body.email }, { phone: req.body.phone }],
+      });
+    } else {
+      user = await models._user.findOne({
+        email: req.body.email,
+      });
     }
+    if (user) return APIResponse.BadRequest(res, { msg: " Email/phone Already in use .", })
 
     // Encrypt Password
     let salt = bcrypt.genSaltSync(10);

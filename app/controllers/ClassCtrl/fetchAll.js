@@ -7,12 +7,12 @@ module.exports = $baseCtrl(async (req, res) => {
   if (isNaN(id)) return APIResponse.NotFound(res);
   let level = await models.level.findById(id);
   if (!level) return APIResponse.NotFound(res, "No Level With that id");
-
+  console.log(req.queryFilter)
   const classes = await models.class.fetchAll(
     req.allowPagination,
     {
       ...req.queryFilter,
-      level: id,
+      // level: id,
     },
     req.queryOptions
   );

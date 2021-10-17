@@ -10,7 +10,8 @@ module.exports = $baseCtrl(async (req, res) => {
   const Class = await models.class.findById(id);
   if (!Class) return APIResponse.NotFound(res);
 
-  await models.subject.deleteMany({ class: id });
+  // await models.subject.deleteMany({ class: id });
+  // await models.student.deleteMany({ class: id });
 
   // delete class
   await Class.delete();

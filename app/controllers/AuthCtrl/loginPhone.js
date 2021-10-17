@@ -36,7 +36,7 @@ module.exports = $baseCtrl(async (req, res) => {
     token: token,
     user: user,
   };
-
+  // for social media login 
   if (!user.used) {
     user.used = true;
     await user.save();

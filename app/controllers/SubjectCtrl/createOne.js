@@ -9,17 +9,20 @@ module.exports = $baseCtrl(
   async (req, res) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) return APIResponse.NotFound(res);
-    const _class = await models.class.findById(id);
-    if (!_class) return APIResponse.NotFound(res, "No Class WIth THat id");
-
-    req.body.class = id;
+    const section = await models.section.findById(id).populate(['class']);//reemah
+    // return APIResponse.Ok(res, section);
+    if (!section) return APIResponse.NotFound(res, "No section WIth THat id");
+    req.body.educationalSystem = section.educationalSystem
+    req.body.level = section.class.level
+    req.body.class = section.class.id
+    req.body.section = id;
 
     if (req.files && req.files["icon"]) {
       req.body.icon = req.files["icon"][0].secure_url;
     }
 
     const subject = await new models.subject(req.body).save();
-
+    await models.subject.populate(subject, [{ path: 'class', populate: { path: 'level', select: 'nameAr' } }, 'educationalSystem'])
     return APIResponse.Created(res, subject);
   }
 );

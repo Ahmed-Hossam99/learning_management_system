@@ -5,7 +5,7 @@ const ctrls = require("../../controllers");
 let router = express.Router();
 
 router.post(
-  "/levels/:id/classes",
+  "/level/:id/classes",
   policies.isAllowed("admin"),
   ctrls.ClassCtrl.CreateOne
 );
