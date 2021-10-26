@@ -13,14 +13,14 @@ module.exports = $baseCtrl(
     async (req, res) => {
         const id = parseInt(req.params.id);
         if (isNaN(id)) return APIResponse.NotFound(res);
-        const lesson = await models.lesson.findById(id);
-        if (!lesson) return APIResponse.NotFound(res, "NO Lesson With That Id");
+        const lecture = await models.lecture.findById(id);
+        if (!lecture) return APIResponse.NotFound(res, "NO lecture With That Id");
         //only admin can add leson && material 
-        if (lesson.addedBy !== req.me.id && req.me.role !== "admin")
+        if (lecture.addedBy !== req.me.id && req.me.role !== "admin")
             return APIResponse.Forbidden(res);
 
         req.body.addedBy = req.me.id;
-        req.body.lesson = id;
+        req.body.lecture = id;
         // add PDF
         if (req.body.type === "pdf") {
             if (req.files && req.files["pdf"]) {

@@ -8,7 +8,7 @@ module.exports = $baseCtrl(
   [{ name: "photo", maxCount: 1 }],
   cloudinaryStorage,
   async (req, res) => {
-    // Check if E-mail Already Exist
+    // Check if E-mail/Phone Already Exist
     let user;
     if (req.body.phone) {
       user = await models._user.findOne({
@@ -19,12 +19,18 @@ module.exports = $baseCtrl(
         email: req.body.email,
       });
     }
-    if (user) return APIResponse.BadRequest(res, { msg: " Email/phone Already in use .", })
+    if (user) {
+      return APIResponse.BadRequest(res, " Email/phone Already in use .");
+    }
 
     // Encrypt Password
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hash;
+    req.body.subjects = [];
+    req.body.sections = [];
+    req.body.levels = [];
+
     req.body.enabled = true;
     // Upload photo if enter by user
     if (req.files && req.files["photo"]) {

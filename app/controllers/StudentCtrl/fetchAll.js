@@ -3,14 +3,13 @@ const models = require("../../models");
 const { APIResponse } = require("../../utils");
 
 module.exports = $baseCtrl(async (req, res) => {
-
-  const classes = await models.educationalSystem.fetchAll(
+  let students = await models.student.fetchAll(
     req.allowPagination,
+    req.queryFilter,
     {
-      ...req.queryFilter,
-    },
-    req.queryOptions
+      ...req.queryOptions,
+      populate: ["section", "level"],
+    }
   );
-
-  return APIResponse.Ok(res, classes);
+  return APIResponse.Ok(res, students);
 });

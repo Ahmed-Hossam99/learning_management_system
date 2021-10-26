@@ -100,6 +100,7 @@ const response = (doc, options) => {
     subjects: doc.subjects, // for teachers
     sections: doc.sections, // for teachers
     classes: doc.classes, // for teachers
+    levels: doc.levels, //for doctors 
     photo: doc.photo,
     email: doc.email,
     phone: doc.phone,

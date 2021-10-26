@@ -5,12 +5,13 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
-  let section = await models.section.findById(id);
-  if (!section) return APIResponse.NotFound(res, "No section with that id");
+  const material = await models.material.findById(id);
+  if (!material) return APIResponse.NotFound(res, "NO material With That Id");
 
-  await models.section.deleteOne(section);
+  if (material.addedBy !== req.me.id && req.me.role !== "admin")
+    return APIResponse.Forbidden(res);
 
-  // here we will delete student related 
+  await material.delete();
 
   return APIResponse.NoContent(res);
 });

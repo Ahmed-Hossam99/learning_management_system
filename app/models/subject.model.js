@@ -20,29 +20,25 @@ const schema = new mongoose.Schema(
     image: {
       type: String,
     },
-    class: {
-      type: Number,
-      ref: "class",
-      required: true,
+    description: {
+      type: String,
     },
     level: {
       type: Number,
       ref: "level",
       required: true,
     },
-    section: {
-      type: Number,
-      ref: "section",
-      required: true,
-    },
-    educationalSystem: {
-      type: Number,
-      ref: 'educationalSystem',
-      required: true,
-    },
-    teacher: {
+    teachers: [{
       type: Number,
       ref: "teacher",
+    }],
+    // teacher: {
+    // //   type: Number,
+    // //   ref: "teacher",
+    // // },
+    visibility: {
+      type: Boolean,
+      default: true,
     },
   },
 );
@@ -51,13 +47,13 @@ const response = (doc) => {
     id: doc.id,
     nameAr: doc.nameAr,
     nameEn: doc.nameEn,
-    educationalSystem: doc.educationalSystem,
     level: doc.level,
-    class: doc.class,
-    section: doc.section,
     title: doc.title,
     teacher: doc.teacher,
     image: doc.image,
+    visibility: doc.visibility,
+    description: doc.description,
+    teachers: doc.teachers,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

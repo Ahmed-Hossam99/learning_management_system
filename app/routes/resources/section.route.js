@@ -4,20 +4,20 @@ const ctrls = require('../../controllers');
 
 let router = express.Router();
 
-router.get("/systems", ctrls.SectionCtrl.fetchAll);
-router.get('/systems/:id', ctrls.SectionCtrl.fetchOne);
+router.get("/sections", ctrls.SectionCtrl.fetchAll);
+router.get('/section/:id', ctrls.SectionCtrl.fetchOne);
 router.post(
-  '/class/:id/sections',
+  '/level/:id/sections',
   policies.isAllowed(['admin']),
   ctrls.SectionCtrl.CreateOne,
 );
-router.put(
-  '/systems/:id',
+router.patch(
+  '/section/:id',
   policies.isAllowed(['admin']),
   ctrls.SectionCtrl.UpdateOne,
 );
 router.delete(
-  '/systems/:id',
+  '/section/:id',
   policies.isAllowed(['admin']),
   ctrls.SectionCtrl.DeleteOne,
 );

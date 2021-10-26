@@ -13,8 +13,8 @@ module.exports = $baseCtrl(async (req, res) => {
 
   const subjects = await models.subject
     .find({ _id: { $in: req.body.subjects } })
-    .populate("section");
-
+    .populate(["teachers", "level"]);
+  console.log(subjects[0])
   let changed = false;
 
   for (let i = 0; i < subjects.length; i++) {

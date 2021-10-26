@@ -47,7 +47,7 @@ module.exports = $baseCtrl(
     }
 
     // save user to db
-    const newUser = await new models.student(req.body).save();
+    const newUser = await new models._user(req.body).save();
 
     const payload = {
       userId: newUser.id,

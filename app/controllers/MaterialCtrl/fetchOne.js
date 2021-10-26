@@ -5,8 +5,8 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
+  const material = await models.material.findById(id);
+  if (!material) return APIResponse.NotFound(res, "NO material With That Id");
 
-  const Class = await models.class.findById(id);
-  if (!Class) return APIResponse.NotFound(res, "No class with that id");
-  return APIResponse.Ok(res, Class);
+  return APIResponse.Ok(res, material);
 });

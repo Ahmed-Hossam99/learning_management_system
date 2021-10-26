@@ -19,14 +19,9 @@ const schema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    class: {
+    level: {
       type: Number,
-      ref: 'class',
-      required: true,
-    },
-    educationalSystem: {
-      type: Number,
-      ref: 'educationalSystem',
+      ref: 'level',
       required: true,
     },
   },
@@ -38,8 +33,9 @@ const response = (doc) => {
     id: doc.id,
     nameAr: doc.nameAr,
     nameEn: doc.nameEn,
-    class: doc.class,
+    level: doc.level,
     current_capacity: doc.current_capacity,
+    capacity: doc.capacity,
     educationalSystem: doc.educationalSystem,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,

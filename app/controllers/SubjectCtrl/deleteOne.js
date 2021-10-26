@@ -8,10 +8,11 @@ module.exports = $baseCtrl(
     if (isNaN(id)) return APIResponse.NotFound(res);
 
     const subject = await models.subject.findById(id);
+    console.log("here")
     if (!subject) return APIResponse.NotFound(res, "No Subject With that id ");
 
     await subject.delete();
 
-    return APIResponse.NoContent(res);
+    return APIResponse.NoContent(res, 'done');
   }
 );

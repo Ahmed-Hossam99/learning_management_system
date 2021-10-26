@@ -12,7 +12,7 @@ module.exports = {
   section: require("./section.model"),
   subject: require("./subject.model"),
   unite: require("./unite.model"),
-  lesson: require("./lesson.model"),
+  lecture: require("./lecture.model"),
   material: require("./material.model"),
   // m_assignment: require("./material/assignment.model"),
   // m_quiz: require("./material/quiz.model"),

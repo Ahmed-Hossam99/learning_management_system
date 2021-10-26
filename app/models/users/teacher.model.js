@@ -14,10 +14,10 @@ const schema = new mongoose.Schema({
             ref: "section",
         },
     ],
-    classes: [
+    levels: [
         {
             type: Number,
-            ref: "class",
+            ref: "level",
         },
     ],
 }, { discriminatorKey: "role" });

@@ -9,20 +9,30 @@ module.exports = $baseCtrl(
   async (req, res) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) return APIResponse.NotFound(res);
-    const section = await models.section.findById(id).populate(['class']);//reemah
+    const level = await models.level.findById(id)//reemah
     // return APIResponse.Ok(res, section);
-    if (!section) return APIResponse.NotFound(res, "No section WIth THat id");
-    req.body.educationalSystem = section.educationalSystem
-    req.body.level = section.class.level
-    req.body.class = section.class.id
-    req.body.section = id;
-
+    if (!level) return APIResponse.NotFound(res, "No level WIth THat id");
+    req.body.level = id
     if (req.files && req.files["icon"]) {
       req.body.icon = req.files["icon"][0].secure_url;
     }
 
+    // let tid
+    // let existTeacher
+    // if (req.body.teacher) {
+    //   tid = req.body.teacher
+    //   if (isNaN(tid)) return APIResponse.NotFound(res);
+    //   existTeacher = await models.teacher.findById(tid)
+    //   if (!existTeacher) return APIResponse.NotFound(res, 'not doctor with that id')
+    //   // teachers.push(tid)
+    // }
     const subject = await new models.subject(req.body).save();
-    await models.subject.populate(subject, [{ path: 'class', populate: { path: 'level', select: 'nameAr' } }, 'educationalSystem'])
+    // if (existTeacher) {
+    //   if (existTeacher.subjects.indexOf(subject.id) === -1) existTeacher.subjects.push(subject.id);
+    //   await existTeacher.save();
+    // }
+    await models.subject.populate(subject, ['level', 'teachers'])
+    //  [{ path: 'level', populate: { path: 'level', select: 'nameAr' } }, 'educationalSystem'])
     return APIResponse.Created(res, subject);
   }
 );

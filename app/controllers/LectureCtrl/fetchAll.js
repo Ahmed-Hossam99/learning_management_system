@@ -5,17 +5,17 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
-  const course = await models._course.findById(id);
-  if (!course) return APIResponse.NotFound(res, "No Course With That id");
+  const subject = await models.subject.findById(id);
+  if (!subject) return APIResponse.NotFound(res, "NO subject With That Id");
 
-  const units = await models._unit.fetchAll(
+  const lectures = await models.lecture.fetchAll(
     req.allowPagination,
     {
       ...req.queryFilter,
-      course: id,
+      subject: id,
     },
     req.queryOptions
   );
 
-  return APIResponse.Ok(res, units);
+  return APIResponse.Ok(res, lectures);
 });

@@ -8,8 +8,6 @@ module.exports = $baseCtrl(async (req, res) => {
   // fetch specif level
   const level = await models.level.findById(id);
   if (!level) return APIResponse.NotFound(res, "No Level With That Id");
-
-  delete req.body.system;
   await level.set(req.body).save();
 
   return APIResponse.Ok(res, level);

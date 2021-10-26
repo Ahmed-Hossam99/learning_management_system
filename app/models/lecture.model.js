@@ -11,11 +11,6 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    unite: {
-      type: Number,
-      ref: "unite",
-      required: true,
-    },
     subject: {
       type: Number,
       ref: "subject",
@@ -37,6 +32,6 @@ const response = (doc) => {
   };
 };
 
-module.exports = $baseModel("lesson", schema, {
+module.exports = $baseModel("lecture", schema, {
   responseFunc: response,
 });

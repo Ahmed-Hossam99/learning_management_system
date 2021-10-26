@@ -5,16 +5,14 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
+  const lecture = await models.lecture.findById(id);
+  if (!lecture) return APIResponse.NotFound(res, "No lecture With That Id");
 
-  // catch specific class
-  const Class = await models.class.findById(id);
-  if (!Class) return APIResponse.NotFound(res);
+  if (lecture.addedBy !== req.me.id && req.me.role !== "admin")
+    return APIResponse.Forbidden(res);
 
-  // await models.subject.deleteMany({ class: id });
-  // await models.student.deleteMany({ class: id });
-
-  // delete class
-  await Class.delete();
+  // await models.material.deleteMany({ lesson: id });
+  await lecture.delete();
 
   return APIResponse.NoContent(res);
 });

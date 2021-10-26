@@ -22,16 +22,14 @@ module.exports = $baseCtrl(
         if (user) return APIResponse.BadRequest(res, { msg: " Email/phone Already in use .", })
         let section = await models.section
             .findById(req.body.section)
-            .populate(['class', 'class.level']);
+            .populate(['level']);
 
         if (!section) return APIResponse.NotFound(res, 'No section with that id ');
         // check capacity of section
-        if (section.current_capacity === section.capacapacity) return APIResponse.BadRequest(res, 'section capacity is full ')
+        if (section.current_capacity === section.capacapacity || section.current_capacity >= section.capacapacity) return APIResponse.BadRequest(res, 'section capacity is full ')
         //    handel extra data
         console.log(section.educationalSystem)
-        req.body.class = section.class
-        req.body.level = section.class.level
-        req.body.educationalSystem = section.educationalSystem
+        req.body.level = section.level
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(req.body.password, salt);
         req.body.password = hash;

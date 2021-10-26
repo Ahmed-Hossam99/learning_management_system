@@ -8,19 +8,9 @@ const schema = new mongoose.Schema(
       ref: 'section',
       required: true,
     },
-    class: {
-      type: String,
-      ref: 'class',
-      required: true,
-    },
     level: {
       type: String,
       ref: 'level',
-      required: true,
-    },
-    educationalSystem: {
-      type: String,
-      ref: 'educationalSystem',
       required: true,
     },
     mustChangePassword: {

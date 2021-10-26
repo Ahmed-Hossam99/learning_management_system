@@ -8,13 +8,13 @@ module.exports = $baseCtrl(
   async (req, res) => {
     const id = parseInt(req.params.id);
     if (isNaN(id)) return APIResponse.NotFound(res);
-    const unite = await models.unite.findById(id).populate("class  section");
+    const unite = await models.subject.findById(id).populate("class  section");
     if (!unite) return APIResponse.NotFound(res, "No unite WIth THat id");
 
-    req.body.unite = id;
-    req.body.subject = unite.subject
-    const lesson = await new models.lesson(req.body).save();
+    // req.body.unite = id;
+    req.body.subject = id
+    const lecture = await new models.lecture(req.body).save();
 
-    return APIResponse.Created(res, lesson);
+    return APIResponse.Created(res, lecture);
   }
 );

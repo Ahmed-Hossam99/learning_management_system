@@ -3,9 +3,9 @@ const $baseModel = require("./$baseModel");
 const timingRules = /^[0-5]?\d:[0-5]\d$/;
 const schema = new mongoose.Schema(
     {
-        lesson: {
+        lecture: {
             type: Number,
-            ref: "lesson",
+            ref: "lecture",
             required: true,
         },
         videoPhoto: {
@@ -56,7 +56,7 @@ const response = (doc) => {
         title: doc.title,
         type: doc.type,
         link: doc.link,
-        lesson: doc.lesson,
+        lecture: doc.lecture,
         createdAt: doc.createdAt,
         updatedAt: doc.updatedAt,
     };

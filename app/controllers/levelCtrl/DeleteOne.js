@@ -9,7 +9,7 @@ module.exports = $baseCtrl(async (req, res) => {
   const level = await models.level.findById(id);
   if (!level) return APIResponse.NotFound(res, "NO Level With That Id");
 
-  await models.class.deleteMany({ level: id });
+  await models.section.deleteMany({ level: id });
 
   await level.delete();
 

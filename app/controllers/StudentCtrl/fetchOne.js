@@ -6,7 +6,7 @@ module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
 
-  const eduSysem = await models.educationalSystem.findById(id);
-  if (!eduSysem) return APIResponse.NotFound(res, "No educational Sysem with that id");
-  return APIResponse.Ok(res, eduSysem);
+  const student = await models._user.findById(id);
+  if (!student) return APIResponse.NotFound(res, "No user with that id");
+  return APIResponse.Ok(res, student);
 });

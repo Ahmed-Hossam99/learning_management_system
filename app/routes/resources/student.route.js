@@ -5,10 +5,16 @@ const ctrls = require("../../controllers");
 let router = express.Router();
 
 router.get(
-    "/teachers",
+    "/student/:id",
     policies.isAllowed(["admin"]),
-    ctrls.TeacherCtrl.fetchTeachers
+    ctrls.StudentCtrl.fetchOne
 );
+router.get(
+    "/students",
+    policies.isAllowed(["admin"]),
+    ctrls.StudentCtrl.fetchAll
+);
+
 
 router.post(
     "/student",
@@ -16,10 +22,10 @@ router.post(
     ctrls.StudentCtrl.addStudent
 );
 
-// router.patch(
-//     "/teachers/:id/subjects",    
-//     policies.isAllowed(["admin"]),
-//     ctrls.TeacherCtrl.assignSubjectsToTeacher
-// );
+router.patch(
+    "/students/:id/path",
+    policies.isAllowed(["admin"]),
+    ctrls.StudentCtrl.assignToSection
+);
 
 module.exports = router;
