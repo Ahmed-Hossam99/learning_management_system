@@ -22,7 +22,6 @@ module.exports = $baseCtrl(async (req, res) => {
       ...req.queryOptions,
       populate: [
         { path: "subject", select: "nameAr nameEn" },
-        { path: "unit", select: "nameAr nameEn" },
         { path: "object", select: "nameAr nameEn" },
         {
           path: "childrenQuestions",

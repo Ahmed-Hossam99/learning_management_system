@@ -12,19 +12,18 @@ module.exports = $baseCtrl(
     async (req, res) => {
         const routePath = req.route.path.split("/");
         console.log(routePath[1])
-        const objectType = routePath[1] === 'lessons' ? 'lesson' : 'other'
+        const objectType = routePath[1] === 'lecture' ? 'lecture' : 'other'
         const id = parseInt(req.params.id)
         if (isNaN(id)) return APIResponse.NotFound(res)
         console.log(objectType)
 
         // object  = type  of question ref ex => lesson / ..... 
-        const object = await models[objectType].findById(id).populate("unite");
+        const object = await models[objectType].findById(id).populate("subject");
         if (!object) return APIResponse.NotFound(res, `No ${objectType} With that id`);
-        const unit = objectType === 'lesson' ? object.unite.id : null;
-        const subject = objectType === 'lesson' ? object.subject : null;
+        const subject = objectType === 'lecture' ? object.subject.id : null;
         const user = req.me;
         // Handle Authorization
-        if (objectType === "lesson") {
+        if (objectType === "lecture") {
             if (req.me.role === "teacher" && req.me.subjects.indexOf(subject) === -1)
                 return APIResponse.Forbidden(res, "Dont Allow To Do This Action");
         }
@@ -47,7 +46,6 @@ module.exports = $baseCtrl(
         question.addedBy = user.id
         question.object = id
         question.objectType = objectType
-        question.unit = unit;
         question.subject = subject;
         let type = question.type;
         if (!type)

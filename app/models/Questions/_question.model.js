@@ -9,12 +9,8 @@ const schema = new mongoose.Schema(
     },
     objectType: {
       type: String,
-      enum: ["lesson"],
+      enum: ["lecture"],
       required: true,
-    },
-    unit: {
-      type: Number,
-      ref: "unit",
     },
     subject: {
       type: Number,
