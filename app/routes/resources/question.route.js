@@ -27,6 +27,6 @@ router.get("/subjects/:id/questions", ctrls.QuestionCtrl.fetchAllToSubjects);
 
 router.delete("/questions/:id", ctrls.QuestionCtrl.deleteOne);
 
-router.post("/questions-group/:id/children", ctrls.QuestionCtrl.createChildren);
+// router.post("/questions-group/:id/children", ctrls.QuestionCtrl.createChildren);
 
 module.exports = router;

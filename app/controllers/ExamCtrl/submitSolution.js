@@ -39,46 +39,6 @@ module.exports = $baseCtrl(
       req.body.answerImage = req.files["answerImage"][0].secure_url;
     }
 
-    // await models.solution.bulkWrite([
-    //   {
-    //     updateOne: {
-    //       filter: {
-    //         student: req.me.id,
-    //         status: "solving",
-    //         exam: id,
-    //         "questions.question": qid,
-    //       },
-    //       update: {
-    //         $set: {
-    //           ...(req.body.answer !== undefined && {
-    //             "questions.$.answer": req.body.answer,
-    //           }),
-    //           ...(req.body.answerImage !== undefined && {
-    //             "questions.$.answerImage": req.body.answerImage,
-    //           }),
-    //         },
-    //       },
-    //     },
-    //   },
-    //   {
-    //     updateOne: {
-    //       filter: {
-    //         student: req.me.id,
-    //         status: "solving",
-    //         exam: id,
-    //         "questions.question": { $ne: qid },
-    //       },
-    //       update: {
-    //         $push: {
-    //           question: qid,
-    //           answer: req.body.answer,
-    //           answerImage: req.body.answerImage,
-    //           type: question.type,
-    //         },
-    //       },
-    //     },
-    //   },
-    // ]);
     if (req.body.answer !== undefined)
       req.body.answer =
         question.type === "truefalse"

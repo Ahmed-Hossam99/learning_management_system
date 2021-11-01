@@ -9,7 +9,7 @@ router.patch("/exams/:id", ctrls.ExamCtrl.updateOneGeneral);
 
 router.patch("/exams-add-questions/:id", ctrls.ExamCtrl.addQuestions);
 
-router.post("/exams/:eid/lessons/:oid", ctrls.ExamCtrl.addNewQuestions);
+router.post("/exams/:eid/lecture/:oid", ctrls.ExamCtrl.addNewQuestions);
 
 router.delete("/exams/:id", ctrls.ExamCtrl.deleteOne);
 
@@ -27,20 +27,20 @@ router.post(
 );
 
 router.get(
-  "/lessons/:id/exams",
+  "/lecture/:id/exams",
   policies.isAllowed(["student", "admin", "teacher"]),
   ctrls.ExamCtrl.fetchGeneralExams
 );
-router.get(
-  "/units/:id/exams",
-  policies.isAllowed(["student", "admin", "teacher"]),
-  ctrls.ExamCtrl.fetchGeneralExams
-);
-router.get(
-  "/subjects/:id/exams",
-  policies.isAllowed(["student", "admin", "teacher"]),
-  ctrls.ExamCtrl.fetchGeneralExams
-);
+// router.get(
+//   "/units/:id/exams",
+//   policies.isAllowed(["student", "admin", "teacher"]),
+//   ctrls.ExamCtrl.fetchGeneralExams
+// );
+// router.get(
+//   "/subjects/:id/exams",
+//   policies.isAllowed(["student", "admin", "teacher"]),
+//   ctrls.ExamCtrl.fetchGeneralExams
+// );
 
 router.patch("/exams/:id/solutions", ctrls.ExamCtrl.submitSolution);
 

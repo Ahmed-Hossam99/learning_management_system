@@ -36,9 +36,8 @@ module.exports = $baseCtrl(
     if (
       req.body.username === undefined ||
       req.body.password === undefined ||
-      req.body.email === undefined ||
-      req.body.gender === undefined ||
-      req.body.country === undefined
+      req.body.email === undefined
+
     ) {
       return APIResponse.BadRequest(res, "You have to fill all options .");
     }

@@ -11,14 +11,13 @@ module.exports = $baseCtrl(async (req, res) => {
   if (exam.addedBy !== req.me.id && req.me.role !== "admin")
     return APIResponse.Forbidden(res, "Dont allow to do this action");
   const routePath = req.route.path.split("/");
-  const objectType = routePath[3] === "lessons" ? "lesson" : "other";
+  const objectType = routePath[3] === "lecture" ? "lecture" : "other";
 
   const oid = parseInt(req.params.oid);
   if (isNaN(oid)) return APIResponse.NotFound(res);
-  const object = await models[objectType].findById(oid).populate("unit");
+  const object = await models[objectType].findById(oid).populate("subject");
   if (!object) return APIResponse.NotFound(res);
-  const unit = objectType === "lesson" ? object.unite.id : null;
-  const subject = objectType === "lesson" ? object.unite.subject : null;
+  const subject = objectType === "lecture" ? object.subject._id : null;
   const user = req.me;
 
   const questions = req.body;
@@ -28,7 +27,6 @@ module.exports = $baseCtrl(async (req, res) => {
     question.addedBy = user.id;
     question.object = oid;
     question.objectType = objectType;
-    question.unite = unit;
     question.subject = subject;
     let type = question.type;
     if (!type)

@@ -23,7 +23,7 @@ module.exports = $baseCtrl(async (req, res) => {
   if (!exam) return APIResponse.NotFound(res, "No General exam with that id");
 
   // all student's solutions
-  const solutions = exam.students[0] ? exam.students[0].solutions : []; //remah 
+  const solutions = exam.students[0] ? exam.students[0].solutions : []; //remah done
   // check if checking solution exists
   let checkingKey = _.findKey(solutions, { status: "checking" }); // if user submitted soltion 
   if (checkingKey !== undefined)
@@ -47,7 +47,7 @@ module.exports = $baseCtrl(async (req, res) => {
   solutions.forEach((solution) => { //if user passed of exam blocked exam
     if ((solution.mark / exam.points) * 100 >= exam.passing_percentage)
       isPassed = true;
-  });
+  });  // to guarenty any user can pass one time on exam 
   if (isPassed) return APIResponse.Forbidden(res, "You Passed This Exam");
   // check if reach limit times to solve
   if (solutions.length >= exam.numberOfAllowedTimesToSolve)

@@ -5,10 +5,8 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const routePath = req.route.path.split("/");
   const objectType =
-    routePath[1] === "lessons"
-      ? "lesson"
-      : routePath[1] === "units"
-      ? "unit"
+    routePath[1] === "lecture"
+      ? "lecture"
       : "subject";
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);

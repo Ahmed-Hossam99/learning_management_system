@@ -6,6 +6,7 @@ const _ = require("lodash");
 module.exports = $baseCtrl(async (req, res) => {
   const eid = parseInt(req.params.eid);
   const qid = parseInt(req.params.qid);
+  console.log('here')
   if (isNaN(eid) || isNaN(qid)) return APIResponse.NotFound(res);
   // handel authorization
   let exam = await models._exam.findById(eid).select("-students");

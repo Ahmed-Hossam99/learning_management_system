@@ -9,12 +9,13 @@ let apiRouter = express.Router();
 
 // public
 // apiRouter.post("/verify-reset", ctrls.AuthCtrl.resetPasswordByPhone);
-apiRouter.post("/forget", ctrls.AuthCtrl.sendForgetSMSPhone);
+apiRouter.post("/forget", ctrls.AuthCtrl.SendForgetCodeEmail);
 apiRouter.post("/check-code", ctrls.AuthCtrl.checkForgetCode);
-apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordAfterCheck);
+apiRouter.post("/reset-password", ctrls.AuthCtrl.resetPasswordByEmail);
 apiRouter.post("/signup", ctrls.AuthCtrl.signupPhone);
 apiRouter.post("/verify", ctrls.AuthCtrl.verifyAccountByPhoneCode);
 apiRouter.post("/login-phone", ctrls.AuthCtrl.loginPhone);
+apiRouter.post("/login-email", ctrls.AuthCtrl.loginEmail);
 apiRouter.post("/signup-email", ctrls.AuthCtrl.signupEmail);
 apiRouter.post("/resend", ctrls.AuthCtrl.SendForgetCodeEmail);
 apiRouter.post("/remove-phone", ctrls.AuthCtrl.removePhoneNumber);

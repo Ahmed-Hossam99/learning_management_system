@@ -22,7 +22,7 @@ const schema = new mongoose.Schema(
     },
     objectType: {
       type: String,
-      enum: ["lesson", "unit", "subject"],
+      enum: ["lecture", "subject"],
       required: true,
     },
     subject: {

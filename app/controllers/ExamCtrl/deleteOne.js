@@ -7,7 +7,7 @@ module.exports = $baseCtrl(async (req, res) => {
   if (isNaN(id)) return APIResponse.NotFound(res);
   const exam = await models.generalExam.findById(id).select("-students");
   if (!exam) return APIResponse.NotFound(res, "No General exam with that id");
-
+  //check Auth
   if (exam.addedBy !== req.me.id && req.me.role !== "admin")
     return APIResponse.Forbidden(res, "Dont allow to do this action");
 

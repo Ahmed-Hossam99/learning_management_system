@@ -17,7 +17,7 @@ const transproter = nodemailer.createTransport({
 module.exports = $baseCtrl(async (req, res) => {
   const user = await models._user.findOne({ email: req.body.email });
   if (!user) return APIResponse.NotFound(res);
-
+  console.log("here")
   const newCode = generator.generateCodes("#+#+#", 100)[0];
   transproter.sendMail({
     to: req.body.email,
@@ -25,7 +25,7 @@ module.exports = $baseCtrl(async (req, res) => {
     subject: "verification code",
     text: ` your verification code is ${newCode}`,
   });
-
+  console.log(newCode)
   // save user and send it
   user.code = newCode;
   await user.save();

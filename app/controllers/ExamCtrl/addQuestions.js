@@ -5,7 +5,7 @@ const { APIResponse } = require("../../utils");
 module.exports = $baseCtrl(async (req, res) => {
   const id = parseInt(req.params.id);
   if (isNaN(id)) return APIResponse.NotFound(res);
-  const exam = await models._exam.findById(id).select("-students");
+  const exam = await models._exam.findById(id).select("-students");//for response time
   if (!exam) return APIResponse.NotFound(res, "NO Exam with that id");
 
   if (exam.addedBy !== req.me.id && req.me.role !== "admin")

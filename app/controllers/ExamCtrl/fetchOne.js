@@ -16,7 +16,7 @@ module.exports = $baseCtrl(async (req, res) => {
       addedBy: req.me.id,
     }),
   };
-  //console.log(query)
+  //console.log(query) //done
   let exam = await models._exam
     .findOne(query, {
       students: { $elemMatch: { student: req.me.id } },

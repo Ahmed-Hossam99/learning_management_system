@@ -53,7 +53,7 @@ const schema = new mongoose.Schema(
     },
     enabled: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     code: {
       type: String,

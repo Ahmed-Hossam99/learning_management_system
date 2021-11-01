@@ -10,6 +10,7 @@ module.exports = {
   subject: require("./subject.model"),
   lecture: require("./lecture.model"),
   material: require("./material.model"),
+  post: require("./post.model"),
   // m_assignment: require("./material/assignment.model"),
   // m_quiz: require("./material/quiz.model"),
   // m_video: require("./material/video.model"),

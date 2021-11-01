@@ -62,7 +62,7 @@ module.exports = $baseCtrl(async (req, res) => {
         } else obj.correct = false;
       }
     } else requireChecking = true;
-  });
+  });//checking 
   if (requireChecking) solution.status = "checking";
   else solution.status = "done";
   solution.submittedAt = moment.utc();

@@ -20,7 +20,7 @@ module.exports = $baseCtrl(async (req, res) => {
   if (key === undefined)
     return APIResponse.NotFound(res, "No question with that id");
 
-  exam.questions[key].point = req.body.point;
+  exam.questions[key].point = req.body.point;//update to new poient 
 
   if (exam.questions[key].question.type === "group") {
     let children = exam.questions[key].childrenQuestions;

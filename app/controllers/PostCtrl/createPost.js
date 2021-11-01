@@ -13,16 +13,15 @@ module.exports = $baseCtrl(
       req.params.postId || req.params.materialId // in case you create comment on material/post
         ? "comment"
         : req.params.commentId // in case you create reply on comment
-        ? "reply"
-        : "post"; // in case you create post on subject discussion / on fly 'ogrty'
+          ? "reply"
+          : "post"; // in case you create post on subject discussion / on fly 'ogrty'
     let model = req.params.materialId
       ? "material"
       : req.params.courseId
-      ? "course"
-      : "post";
+        ? "course"
+        : "post";
     let id =
       parseInt(req.params.materialId) || // in case you create comment on material
-      parseInt(req.params.courseId) || // in case you create post on subject discussion
       parseInt(req.params.postId) || // in case you create comment on post
       parseInt(req.params.commentId) || // in case you create reply on comment
       null; // in case you create post in ogrty
@@ -44,14 +43,14 @@ module.exports = $baseCtrl(
           model === "material"
             ? parseInt(req.params.materialId)
             : model === "course"
-            ? parseInt(req.params.courseId)
-            : post.object,
+              ? parseInt(req.params.courseId)
+              : post.object,
         objectType:
           model === "material"
             ? "material"
             : model === "subject"
-            ? "subject"
-            : post.objectType,
+              ? "subject"
+              : post.objectType,
         depth: type === "post" ? 0 : type === "comment" ? 1 : 2,
         directParent: type === "post" || model !== "post" ? null : post.id,
         parents: [
