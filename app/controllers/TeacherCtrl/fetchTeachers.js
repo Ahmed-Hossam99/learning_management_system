@@ -8,7 +8,7 @@ module.exports = $baseCtrl(async (req, res) => {
     req.queryFilter,
     {
       ...req.queryOptions,
-      select: "username photo email phone",
+      populate: ['sections', 'subjects'],
     }
   );
   return APIResponse.Ok(res, teachers);
