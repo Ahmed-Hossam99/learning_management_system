@@ -11,8 +11,8 @@ module.exports = $baseCtrl(
     const unite = await models.subject.findById(id).populate("class  section");
     if (!unite) return APIResponse.NotFound(res, "No unite WIth THat id");
 
-    // req.body.unite = id;
     req.body.subject = id
+    req.body.addedBy = req.me.id
     const lecture = await new models.lecture(req.body).save();
 
     return APIResponse.Created(res, lecture);

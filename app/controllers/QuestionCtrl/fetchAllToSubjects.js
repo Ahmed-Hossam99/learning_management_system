@@ -7,8 +7,7 @@ module.exports = $baseCtrl(async (req, res) => {
   if (isNaN(id)) return APIResponse.NotFound(res);
   const subject = await models.subject.findById(id);
   if (!subject) return APIResponse.NotFound(res, "NO Subject with that id");
-
-  if (subject.teacher !== req.me.id && req.me.role !== "admin")
+  if (req.me.subjects.indexOf(subject._id) === -1 && req.me.role !== "admin")
     return APIResponse.Forbidden(res, "Dont allow to do this action");
 
   const lessons = await models._question.fetchAll(

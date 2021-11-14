@@ -10,6 +10,7 @@ router.patch("/exams/:id", ctrls.ExamCtrl.updateOneGeneral);
 router.patch("/exams-add-questions/:id", ctrls.ExamCtrl.addQuestions);
 
 router.post("/exams/:eid/lecture/:oid", ctrls.ExamCtrl.addNewQuestions);
+router.post("/exams/:eid/subject/:oid", ctrls.ExamCtrl.addNewQuestions);
 
 router.delete("/exams/:id", ctrls.ExamCtrl.deleteOne);
 

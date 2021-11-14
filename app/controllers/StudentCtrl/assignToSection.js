@@ -16,7 +16,7 @@ module.exports = $baseCtrl(async (req, res) => {
   if (!section) return APIResponse.NotFound(res, "No Section with that id");
 
   if (section.current_capacity >= section.capacity)
-    return APIResponse.BadRequest(res, "This Section is Locked");
+    return res.status(400).json({ flag: 2 });
 
   let prevSection = await models.section
     .findById(user.section)

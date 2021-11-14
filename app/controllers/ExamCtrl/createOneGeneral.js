@@ -28,8 +28,6 @@ module.exports = $baseCtrl(async (req, res) => {
     if (objectType === "subject" && req.me.role === "teacher") {
       if (req.me.subjects.indexOf(doc._id) === -1)
         return APIResponse.Forbidden(res, "Dont Allow To Do this action");
-      req.body.subject = doc.subject.id;
-
     }
 
     // handle authorization

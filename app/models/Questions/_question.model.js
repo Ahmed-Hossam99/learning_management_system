@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
     },
     objectType: {
       type: String,
-      enum: ["lecture"],
+      enum: ["lecture", "subject"],
       required: true,
     },
     subject: {

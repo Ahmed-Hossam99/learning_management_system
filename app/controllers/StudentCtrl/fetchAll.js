@@ -3,6 +3,7 @@ const models = require("../../models");
 const { APIResponse } = require("../../utils");
 
 module.exports = $baseCtrl(async (req, res) => {
+  console.log(req.queryFilter)
   let students = await models.student.fetchAll(
     req.allowPagination,
     req.queryFilter,

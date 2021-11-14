@@ -16,6 +16,11 @@ const schema = new mongoose.Schema(
       ref: "subject",
       required: true,
     },
+    addedBy: {
+      type: Number,
+      ref: "user",
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -27,6 +32,7 @@ const response = (doc) => {
     nameEn: doc.nameEn,
     unite: doc.unite,
     subject: doc.subject,
+    addedBy: doc.addedBy,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };

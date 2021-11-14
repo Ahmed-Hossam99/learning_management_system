@@ -19,7 +19,7 @@ module.exports = $baseCtrl(
                 email: req.body.email,
             });
         }
-        if (user) return APIResponse.BadRequest(res, { msg: " Email/phone Already in use .", })
+        if (user) return res.status(400).json({ flag: 1 });
         let section = await models.section
             .findById(req.body.section)
             .populate(['level']);
