@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
       required: true,
     },
     level: {
-      type: String,
+      type: Number,
       ref: 'level',
       required: true,
     },
