@@ -25,12 +25,26 @@ module.exports = $baseCtrl(async (req, res) => {
   if (req.me.role === 'admin' || req.me.role === 'teacher') {
     console.log(req.me.role)
 
+    if (objectType === "subject" && req.me.role === "teacher") {
+      if (req.me.subjects.indexOf(doc._id) === -1)
+        return APIResponse.Forbidden(res, "Dont Allow To Do this action");
+      req.body.subject = doc.subject.id;
+
+    }
+
     // handle authorization
     if (objectType === "lecture" && req.me.role === "teacher") {
       if (req.me.subjects.indexOf(doc.subject._id) === -1)
         return APIResponse.Forbidden(res, "Dont Allow To Do this action");
     }
-    req.body.subject = doc.subject.id;
+
+    if (objectType === "lecture")
+      req.body.subject = doc.subject.id;
+
+
+
+    if (objectType === "subject")
+      req.body.subject = doc.id;
 
     if (req.body.duration) req.body.isTimed = true;
     else req.body.duration = null;

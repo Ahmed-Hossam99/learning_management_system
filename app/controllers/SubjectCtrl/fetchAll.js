@@ -25,7 +25,7 @@ module.exports = $baseCtrl(async (req, res) => {
     },
     {
       ...req.queryOptions,
-      populate: ["section", { path: "teacher", select: "username photo" }],
+      populate: [{ path: "teacher", select: "username photo" }],
     }
   );
 

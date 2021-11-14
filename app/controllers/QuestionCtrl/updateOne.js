@@ -42,7 +42,9 @@ module.exports = $baseCtrl(
     delete req.body.objectType;
     delete req.body.subject;
     delete req.body.type;
-
+    if (!req.body.image) {
+      question.image = null
+    }
     await question.set(req.body).save();
 
     return APIResponse.Ok(res, question);

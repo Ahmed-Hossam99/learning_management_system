@@ -20,6 +20,7 @@ module.exports = $baseCtrl(async (req, res) => {
 
   let prevSection = await models.section
     .findById(user.section)
+  user.level = section.level._id
   await user.set(req.body).save();
   if (prevSection.id !== req.body.section)
     prevSection.current_capacity--;
