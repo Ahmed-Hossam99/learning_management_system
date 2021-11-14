@@ -41,6 +41,7 @@ router.delete(
   ctrls.SubjectCtrl.deleteOne
 );
 router.get("/subjects/:id", ctrls.SubjectCtrl.fetchOne);//done
+router.get("/subject/:id/doctors", ctrls.SubjectCtrl.fetchDoctorSubject);//done
 // router.post(
 //   "/sections/:id/subjects",
 //   policies.isAllowed(["admin"]),

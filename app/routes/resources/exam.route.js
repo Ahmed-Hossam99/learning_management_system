@@ -31,6 +31,11 @@ router.get(
   policies.isAllowed(["student", "admin", "teacher"]),
   ctrls.ExamCtrl.fetchGeneralExams
 );
+router.get(
+  "/subject/:id/exams",
+  policies.isAllowed(["student", "admin", "teacher"]),
+  ctrls.ExamCtrl.fetchGeneralExams
+);
 // router.get(
 //   "/units/:id/exams",
 //   policies.isAllowed(["student", "admin", "teacher"]),
