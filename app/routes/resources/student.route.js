@@ -11,7 +11,6 @@ router.get(
 );
 router.get(
     "/students",
-    policies.isAllowed(["admin"]),
     ctrls.StudentCtrl.fetchAll
 );
 
