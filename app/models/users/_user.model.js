@@ -38,7 +38,7 @@ const schema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      match: phoneRules,
+      // match: phoneRules,
       unique: true,
       index: true,
       sparse: true,
